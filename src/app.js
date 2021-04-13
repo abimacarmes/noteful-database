@@ -86,7 +86,7 @@ const morganOption = (NODE_ENV === 'production')
 app.use(function errorHandler(error, req, res, next){
     let response
     if(NODE_ENV ==='production'){
-        response = {error: {message:'server error'}}
+        response = {error: {message:'testing testing'}}
     }
     else{
         console.error(error)
