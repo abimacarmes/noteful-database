@@ -14,6 +14,7 @@ app.use(express.json())
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
+app.options('*', cors())
 
 app.get('/',(req,res) => {
     res.send("Noteful Database Endpoint Homepage")
