@@ -19,7 +19,7 @@ const corsOptions = {
     origin: 'https://noteful-beryl-theta.vercel.app'
 }
 
-app.get('/', cors() ,(req,res) => {
+app.get('/', (req,res) => {
     res.send("Noteful Database Endpoint Homepage")
 })
 
