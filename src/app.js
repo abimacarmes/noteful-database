@@ -14,13 +14,16 @@ app.use(express.json())
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
-app.options('*', cors())
+
+const corsOptions = {
+    origin: 'https://obscure-hollows-57839.herokuapp.com/'
+}
 
 app.get('/',(req,res) => {
     res.send("Noteful Database Endpoint Homepage")
 })
 
-app.get('/notes', (req,res, next) => {
+app.get('/notes', cors(corsOptions), (req,res, next) => {
     const knexInstance = req.app.get('db')
     databaseService.getAllNotes(knexInstance)
         .then(notes => res.json(notes))
