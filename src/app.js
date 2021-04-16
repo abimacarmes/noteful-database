@@ -12,6 +12,10 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(express.json())
 
+app.get('/',(req,res) => {
+    res.send("Noteful Database Endpoint Homepage")
+})
+
 app.get('/notes', (req,res, next) => {
     const knexInstance = req.app.get('db')
     databaseService.getAllNotes(knexInstance)
@@ -36,7 +40,7 @@ app.get('/folders', (req,res,next) => {
         .catch(next)
 })
 
-app.get('/folders/', (req,res,next) => {
+app.get('/folders/:folderId', (req,res,next) => {
     const knexInstance = req.app.get('db')
     const {folderId} = req.params
 
@@ -54,11 +58,12 @@ app.post('/folders', (req,res,next) => {
     databaseService.insertFolder(knexInstance,newFolder)
         .then(newFolder => {
             res.status(201).json(newFolder)
+            console.log(json(newFolder))
         })
         .catch(next)
 })
 
-app.post('/notes/', (req, res, next) => {
+app.post('/notes', (req, res, next) => {
     const knexInstance = req.app.get('db')
     const {id,name,modified,folderid,content} = req.body
     const newNote = {id,name,modified,folderid,content}
@@ -86,7 +91,7 @@ const morganOption = (NODE_ENV === 'production')
 app.use(function errorHandler(error, req, res, next){
     let response
     if(NODE_ENV ==='production'){
-        response = {error: {message:'testing testing'}}
+        response = {error: {message: error.message}}
     }
     else{
         console.error(error)
