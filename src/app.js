@@ -6,9 +6,10 @@ const helmet = require('helmet')
 const {NODE_ENV} = require('./config')
 const databaseService = require('./databaseService')
 const knex = require('knex')
+const bodyParser = require('body-parser')
+
 
 const app = express()
-const jsonParser = express.json()
 app.use(express.json())
 
 app.get('/',(req,res) => {
@@ -49,7 +50,7 @@ app.get('/folders/:folderId', (req,res,next) => {
 
 })
 
-app.post('/folders', jsonParser ,(req,res,next) => {
+app.post('/folders', (req,res,next) => {
     const knexInstance = req.app.get('db')
     const {folderid, name} = req.body
     const newFolder = {folderid,name}
@@ -62,7 +63,7 @@ app.post('/folders', jsonParser ,(req,res,next) => {
         .catch(next)
 })
 
-app.post('/notes', jsonParser , (req, res, next) => {
+app.post('/notes', (req, res, next) => {
     const knexInstance = req.app.get('db')
     const {id,name,modified,folderid,content} = req.body
     const newNote = {id,name,modified,folderid,content}
