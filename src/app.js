@@ -11,8 +11,7 @@ const bodyParser = require('body-parser')
 
 const app = express()
 app.use(express.json())
-app.use(morgan(morganOption))
-app.use(helmet())
+
 app.use(cors())
 
 const corsOptions = {
@@ -107,7 +106,8 @@ app.use(function errorHandler(error, req, res, next){
     res.status(500).json(response)
 })
 
-
+app.use(morgan(morganOption))
+app.use(helmet())
 
 
 module.exports = app
