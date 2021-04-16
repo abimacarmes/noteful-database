@@ -19,11 +19,11 @@ const corsOptions = {
     origin: 'https://noteful-beryl-theta.vercel.app'
 }
 
-app.get('/',(req,res) => {
+app.get('/', cors() ,(req,res) => {
     res.send("Noteful Database Endpoint Homepage")
 })
 
-app.get('/notes', cors(corsOptions), (req,res, next) => {
+app.get('/notes', (req,res, next) => {
     const knexInstance = req.app.get('db')
     databaseService.getAllNotes(knexInstance)
         .then(notes => res.json(notes))
