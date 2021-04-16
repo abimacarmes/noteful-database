@@ -51,7 +51,7 @@ app.get('/folders/:folderId', (req,res,next) => {
 })
 
 app.post('/folders', (req,res,next) => {
-    const knexInstance = req.app.get('db')
+    const knexInstance = req.app.post('db')
     const {folderid, name} = req.body
     const newFolder = {folderid,name}
 
@@ -64,7 +64,7 @@ app.post('/folders', (req,res,next) => {
 })
 
 app.post('/notes', (req, res, next) => {
-    const knexInstance = req.app.get('db')
+    const knexInstance = req.app.post('db')
     const {id,name,modified,folderid,content} = req.body
     const newNote = {id,name,modified,folderid,content}
 
@@ -76,7 +76,7 @@ app.post('/notes', (req, res, next) => {
 })
 
 app.delete('/notes/:noteId', (req,res,next) => {
-    const knexInstance = req.app.get('db')
+    const knexInstance = req.app.delete('db')
     const {noteId} = req.params
 
     databaseService.deleteNote(knexInstance,noteId)
