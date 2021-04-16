@@ -16,7 +16,7 @@ app.use(helmet())
 app.use(cors())
 
 const corsOptions = {
-    origin: 'https://obscure-hollows-57839.herokuapp.com/'
+    origin: 'https://noteful-beryl-theta.vercel.app'
 }
 
 app.get('/',(req,res) => {
